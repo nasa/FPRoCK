@@ -130,13 +130,8 @@ python executor.py 10 rnd-to-zero  benchmarks/eps_line/ceb_5.fpr
 
 Contact information
 -------------------
-If you have any question or problem, please contact:
 
-* [Rocco Salvia](mailto:rocco@cs.utah.edu)
-* [Marco A. Feliu](mailto:marco.feliu@nianet.org)
-* [Laura Titolo](mailto:laura.titolo@nianet.org)
-* [Mariano Moscato](mailto:mariano.moscato@nianet.org)
-* [C&eacute;sar A. Mu&ntilde;oz](http://shemesh.larc.nasa.gov/people/cam)
+[C&eacute;sar A. Mu&ntilde;oz](http://shemesh.larc.nasa.gov/people/cam)
 
 ### License and Copyright Notice
 
