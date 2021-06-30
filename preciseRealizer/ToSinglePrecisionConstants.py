@@ -30,7 +30,6 @@
 # ANY SUCH MATTER SHALL BE THE IMMEDIATE, UNILATERAL TERMINATION OF THIS
 # AGREEMENT.
 
-import decimal
 import math as _math
 from decimal import *
 import sys
@@ -67,7 +66,6 @@ def single(f):
 	n, d = abs(f).as_integer_ratio()
 
 	destinationPrecision=23
-	doublePrecision=53
 
 	k = d.bit_length() - 1
 
@@ -79,7 +77,6 @@ def single(f):
 
 	Nbin=bin(n)
 	SBinN=Nbin
-	Dbin=bin(d)
 
 	maskUpper="0b"+str("1"*(destinationPrecision+1))
 	maskUpper=maskUpper+str("0"*(len(str(SBinN))-len(maskUpper)))
@@ -100,7 +97,7 @@ def single(f):
 	decimal=lowerPart
 	tot=integer+"."+decimal
 
-	res=Decimal(parse_bin(tot)).quantize(Decimal('1.'), rounding=	ROUND_HALF_EVEN)
+	res=Decimal(parse_bin(tot)).quantize(Decimal('1.'), rounding=ROUND_HALF_EVEN)
 
 	resBin= format(int(res), '0'+str(destinationPrecision)+'b')+"0"*(queueLen)
 
@@ -159,7 +156,7 @@ def nextone(num):
 
 def previous111(strBound,precVar):
 	if precVar==(23,8):
-		print "single"
+		print("single")
 		origValue=single(eval(strBound))
 		strOrigValue=strFormatFromDecimalLib(origValue)
 		if strOrigValue!=strBound:#bound is not exactly representable in double or single precision
@@ -213,8 +210,8 @@ def next111(strBound,precVar):
 			return strOrigValue
 	else:
 		exit("Precision not recognized")
-#print parse_bin("0.0001100110011001100110011001100110011001100110011001100110011001100110011001100110011001101")
-#print next111("-2.99999999999999",(23,8))
-#print previous111("-2.99999999999999",(23,8))
-#print next111("3.0",(52,11))
-#print previous111("3.0",(52,11))
+#print(parse_bin("0.0001100110011001100110011001100110011001100110011001100110011001100110011001100110011001101"))
+#print(next111("-2.99999999999999",(23,8)))
+#print(previous111("-2.99999999999999",(23,8)))
+#print(next111("3.0",(52,11)))
+#print(previous111("3.0",(52,11)))

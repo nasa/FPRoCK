@@ -43,55 +43,55 @@ from threading import Timer
 def mykill(procs):
 	for proc in procs:
 		try:
-			print "KILL:" + str(os.getpgid(proc.pid))
+			print("KILL:" + str(os.getpgid(proc.pid)))
 			os.killpg(os.getpgid(proc.pid), signal.SIGKILL)  # Send the signal to all the process groups
 		except:
-			print "Process: "+str(proc.pid)+ " already died!"
+			print("Process: "+str(proc.pid)+ " already died!")
 
 if len(sys.argv)<4:
-	print "Arg-1 Timeout in seconds \n"
-	print "Arg-2 Rounding modes: rnd-to-zero, rnd-to-positive, rnd-to-negative, rnd-to-nearest-away, rnd-to-nearest-even\n"
-	print "Arg-3 Name of the input file \n"
+	print("Arg-1 Timeout in seconds \n")
+	print("Arg-2 Rounding modes: rnd-to-zero, rnd-to-positive, rnd-to-negative, rnd-to-nearest-away, rnd-to-nearest-even\n")
+	print("Arg-3 Name of the input file \n")
 	exit("Please specify the 2 parameters. Ex. python executor.py 10 rnd-to-zero config.txt\n")
 timeout=int(str(sys.argv[1]))
 smtRoundingMode=str(sys.argv[2])
 nameFile=str(sys.argv[3])
 
 #config for Binary Search Numeric
-print "The current script directory: "
+print("The current script directory: ")
 script_dir = os.path.dirname(sys.argv[0])
 if script_dir == "":
     script_dir = "./"
-print script_dir
-print "Current working directory: "
+print(script_dir)
+print("Current working directory: ")
 cwd_dir = os.getcwd()
-print cwd_dir
+print(cwd_dir)
 resultFolder= cwd_dir + "/results/"
 if not os.path.exists(resultFolder):
     os.makedirs(resultFolder)
 exe0="python " + script_dir + "/preciseRealizer/solverBSN.py "+smtRoundingMode+" "+nameFile
-print exe0
+print(exe0)
 val0=os.system(exe0)
 if val0==0:
 	processes=[]
-	print "Translation BSN succeed!"
+	print("Translation BSN succeed!")
 	exeCVC4="cvc4 --quiet --produce-models --lang=smt2 ./smtlib2BinarySearchNumeric.txt"
 	exez3="z3 ./smtlib2BinarySearchNumeric.txt"
 	mathsat="mathsat ./smtlib2BinarySearchNumeric.txt"
 
-	print exeCVC4
+	print(exeCVC4)
 	exeCVC4=shlex.split(exeCVC4)
 	with open(resultFolder+"cvc4BSN.txt","w+") as outcvc4:
 		c=subprocess.Popen(exeCVC4,shell=False,preexec_fn=os.setsid,stdout=outcvc4,stderr=outcvc4)
 	processes.append(c)
 
-	print exez3
+	print(exez3)
 	exez3=shlex.split(exez3)
 	with open(resultFolder+"z3BSN.txt","w+") as outz3:
 		z=subprocess.Popen(exez3,shell=False,preexec_fn=os.setsid,stdout=outz3,stderr=outz3)
 	processes.append(z)
 
-	print mathsat
+	print(mathsat)
 	mathsat=shlex.split(mathsat)
 	with open(resultFolder+"mathsatBSN.txt","w+") as outmathsat:
 		m=subprocess.Popen(mathsat,shell=False,preexec_fn=os.setsid,stdout=outmathsat,stderr=outmathsat)
@@ -99,27 +99,27 @@ if val0==0:
 
 	#config for Binary Search Assignment
 	exe1="python " + script_dir + "/preciseRealizer/solverBLSA.py "+smtRoundingMode+" "+nameFile+" "+str(True)
-	print exe1
+	print(exe1)
 	val1=os.system(exe1)
 	if val1==0:
-		print "Translation BLSA succeed (Binary Assignment)!"
+		print("Translation BLSA succeed (Binary Assignment)!")
 		exeCVC4="cvc4 --quiet --produce-models --lang=smt2 ./smtlib2BinarySearchAssignment.txt"
 		exez3="z3 ./smtlib2BinarySearchAssignment.txt"
 		mathsat="mathsat ./smtlib2BinarySearchAssignment.txt"
 
-		print exeCVC4
+		print(exeCVC4)
 		exeCVC4=shlex.split(exeCVC4)
 		with open(resultFolder+"cvc4BSA.txt","w+") as outcvc4:
 			c=subprocess.Popen(exeCVC4,shell=False,preexec_fn=os.setsid,stdout=outcvc4,stderr=outcvc4)
 		processes.append(c)
 
-		print exez3
+		print(exez3)
 		exez3=shlex.split(exez3)
 		with open(resultFolder+"z3BSA.txt","w+") as outz3:
 			z=subprocess.Popen(exez3,shell=False,preexec_fn=os.setsid,stdout=outz3,stderr=outz3)
 		processes.append(z)
 
-		print mathsat
+		print(mathsat)
 		mathsat=shlex.split(mathsat)
 		with open(resultFolder+"mathsatBSA.txt","w+") as outmathsat:
 			m=subprocess.Popen(mathsat,shell=False,preexec_fn=os.setsid,stdout=outmathsat,stderr=outmathsat)
@@ -127,27 +127,27 @@ if val0==0:
 
 		#config for Linear Search Assignment
 		exe1BIS="python " + script_dir + "/preciseRealizer/solverBLSA.py "+smtRoundingMode+" "+nameFile+" "+str(False)
-		print exe1BIS
+		print(exe1BIS)
 		val1BIS=os.system(exe1BIS)
 		if val1BIS==0:
-			print "Translation BLSA succeed (Linear Assignment)!"
+			print("Translation BLSA succeed (Linear Assignment)!")
 			exeCVC4="cvc4 --quiet --produce-models --lang=smt2 ./smtlib2LinearSearchAssignment.txt"
 			exez3="z3 ./smtlib2LinearSearchAssignment.txt"
 			mathsat="mathsat ./smtlib2LinearSearchAssignment.txt"
 
-			print exeCVC4
+			print(exeCVC4)
 			exeCVC4=shlex.split(exeCVC4)
 			with open(resultFolder+"cvc4LSA.txt","w+") as outcvc4:
 				c=subprocess.Popen(exeCVC4,shell=False,preexec_fn=os.setsid,stdout=outcvc4,stderr=outcvc4)
 			processes.append(c)
 
-			print exez3
+			print(exez3)
 			exez3=shlex.split(exez3)
 			with open(resultFolder+"z3LSA.txt","w+") as outz3:
 				z=subprocess.Popen(exez3,shell=False,preexec_fn=os.setsid,stdout=outz3,stderr=outz3)
 			processes.append(z)
 
-			print mathsat
+			print(mathsat)
 			mathsat=shlex.split(mathsat)
 			with open(resultFolder+"mathsatLSA.txt","w+") as outmathsat:
 				m=subprocess.Popen(mathsat,shell=False,preexec_fn=os.setsid,stdout=outmathsat,stderr=outmathsat)
@@ -155,7 +155,7 @@ if val0==0:
 
 			#config for COLIBRI
 			exe2="python " + script_dir + "/colibri_2073/colibrInterface.py "+nameFile
-			print exe2
+			print(exe2)
 			#val2=os.system(exe2)
 			val2=0
 
@@ -163,10 +163,10 @@ if val0==0:
 
 				#os.chdir(script_dir + "/colibri_2073/")
 
-				print "Translation for COLIBRI succeed!"
+				print("Translation for COLIBRI succeed!")
 				exeCOLIBRI="./smt_colibri_local_linux.sh"
 
-				print exeCOLIBRI
+				print(exeCOLIBRI)
 				exeCOLIBRI=shlex.split(exeCOLIBRI)
 
 				#with open(resultFolder+"/COLIBRI.txt","w+") as colibri:
@@ -182,14 +182,14 @@ if val0==0:
 				finally:
 					timer.cancel()
 			else:
-				print "Translation FAILURE!"
+				print("Translation FAILURE!")
 				exit(1)
 		else:
-				print "Translation FAILURE!"
+				print("Translation FAILURE!")
 				exit(1)
 	else:
-		print "Translation FAILURE!"
+		print("Translation FAILURE!")
 		exit(1)
 else:
-	print "Translation FAILURE!"
+	print("Translation FAILURE!")
 	exit(1)

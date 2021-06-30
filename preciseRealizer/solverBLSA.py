@@ -32,10 +32,10 @@
 
 import sys
 import math
-import re
 from decimal import *
 from ToSinglePrecisionConstants import *
 from library import *
+
 
 def encodeNewVariable(var,isFP):
 	encodingCurrentVar=(
@@ -54,10 +54,8 @@ def encodeNewVariable(var,isFP):
 	valueBiggestFloat=Decimal((2-(2**-mantissaPrecision))*2**(2**(exponentPrecision-1)-1))
 
 	lowerValue=max(getAbsLowerBound(variablesFP[var]),valueSmallestFloat)
-	lower=strFormatFromDecimal(lowerValue)
 
 	upperValue=min(getAbsUpperBound(variablesFP[var]),valueBiggestFloat)
-	upper=strFormatFromDecimal(upperValue)
 
 	tmpValue=int(math.log(upperValue,2))
 	tmpExp=tmpValue+1
@@ -188,10 +186,7 @@ if ActivateBinarySearch=="True":
 else:
 	prop="Linear"
 
-File=open("smtlib2"+prop+"SearchAssignment.txt","w+")
-File.write(strFinal)
-File.close()
-print "\n\nDONE"
+with open("smtlib2"+prop+"SearchAssignment.txt","w+") as File:
+        File.write(strFinal)
 
-
-
+print("\n\nDONE")

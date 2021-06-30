@@ -35,7 +35,7 @@ Err_X = 1.1368683772161603e-13
 Err_Y = 1.1368683772161603e-13
 ```
 
-In its current version, *FPRoCK* supports conjuntions (and), negations (not), equalities and disequalities (=, !=, <, >, <=, >=)  basic arithmetic operators over the reals (+,-,\*,/) and over the floats (+FP,-FP,\*FP,/FP), and the absolute value operator (abs).
+In its current version, *FPRoCK* supports conjunctions (and), negations (not), equalities and disequalities (=, !=, <, >, <=, >=)  basic arithmetic operators over the reals (+,-,\*,/) and over the floats (+FP,-FP,\*FP,/FP), and the absolute value operator (abs).
 Constant integer values are required to be written with a .0 at the end, e.g. 2.0. Scientific format is also accepted, e.g. 1.1368683772161603e-13.
 
 Prerequisites

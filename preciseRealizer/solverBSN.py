@@ -198,10 +198,6 @@ strFinal=roundingModesEncoding+AbsoluteValueFunctionEncoding+bs+"\n"+strFinal
 
 
 strFinal=strFinal+"\n(check-sat)\n(get-model)"
-File=open("smtlib2BinarySearchNumeric.txt","w+")
-File.write(strFinal)
-File.close()
-print "\n\nDONE"
-
-
-
+with open("smtlib2BinarySearchNumeric.txt","w+") as File:
+        File.write(strFinal)
+print("\n\nDONE")

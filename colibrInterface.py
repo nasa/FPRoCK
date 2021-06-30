@@ -30,22 +30,23 @@
 # ANY SUCH MATTER SHALL BE THE IMMEDIATE, UNILATERAL TERMINATION OF THIS
 # AGREEMENT.
 
-import sys,os
+import sys
+import os
 sys.path.insert(0, os.getcwd()+"/preciseRealizer/")
 sys.path.insert(0, "/fprock/preciseRealizer")
 
-print "The current script directory: "
+print("The current script directory: ")
 script_dir = os.path.dirname(sys.argv[0])
 if script_dir == "":
     script_dir = "./"
-print script_dir
-print "Current working directory: "
+print(script_dir)
+print("Current working directory: ")
 cwd_dir = os.getcwd()
-print cwd_dir
+print(cwd_dir)
 resultFolder= cwd_dir + "/results/"
 
 thepath = script_dir + "../library"
-print thepath
+print(thepath)
 
 from library import *
 
@@ -401,9 +402,6 @@ while i<len(configText):
 
 strFinal=strFinal[0:-2]
 strFinal=strFinal+" . "
-File=open(script_dir +"/smt_colibri.in","w+")
-File.write(strFinal)
-File.close()
-print "\n\nDONE"
-
-
+with open(script_dir +"/smt_colibri.in","w+") as File:
+    File.write(strFinal)
+print("\n\nDONE")
